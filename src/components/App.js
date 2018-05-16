@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import logo from '../logo.svg';
 import '../styles/App.css';
+import { fetchSwChars } from '../actions'
 // pull in actions from action/index
 
 class App extends Component {
   componentDidMount() {
-    // call our action
+    this.props.fetchSwChars();
   }
   render() {
     return (
@@ -28,6 +29,12 @@ class App extends Component {
 
 // our mapDispatchToProps needs to have two properties inherited from state
 // the chars and the fetching boolean
-export default connect(null, {
-  /* actions go here */
+const mapDispatchToProps = state => {
+  return {
+    chars: state.chars,
+    fetching: state.fetching
+  };
+};
+export default connect(mapDispatchToProps, {
+  fetchSwChars
 })(App);
